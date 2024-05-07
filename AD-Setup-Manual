@@ -1,0 +1,95 @@
+**Step 1: Define Lab Objectives**
+
+- **Explanation:** Clearly define your objectives for the lab, such as learning Active Directory, testing specific configurations, or simulating real-world scenarios. Having a clear goal will guide your actions throughout the setup.
+
+**Step 2: Select Virtualization Platform**
+
+- **Instructions:**
+    - Download and install Oracle VirtualBox on your host machine.
+    - Open VirtualBox to start creating your virtual machines.
+
+**Step 3: Prepare the Host Machine**
+
+- **Instructions:** Ensure your host machine has sufficient resources (CPU, RAM, storage) to run virtual machines efficiently. Check system requirements for VirtualBox and make sure your host machine meets them.
+
+**Step 4: Create Virtual Machines (VMs)**
+
+- **Instructions:**
+    - In VirtualBox, click "New" to create a new virtual machine.
+    - Name your VMs (e.g., "DC" for domain controller and "Client" for the client machine).
+    - Choose the appropriate operating system (Windows Server 2019 for DC and Windows 10 for the client).
+    - Allocate an appropriate amount of RAM (e.g., 2GB for the DC and 1GB for the client).
+    - Create a virtual hard disk with sufficient storage (e.g., 40GB).
+    - Review your settings and click "Create" to create the VMs.
+
+**Step 5: Install Operating Systems**
+
+- **Instructions:**
+    - Select the VM in VirtualBox and click "Start" to boot from the Windows Server 2019 ISO file for the domain controller.
+    - Follow the on-screen instructions to install Windows Server 2019.
+    - Repeat the same process for the client machine using the Windows 10 ISO.
+
+**Step 6: Configure Network Settings**
+
+- **Instructions:**
+    - In VirtualBox, select each VM and click "Settings."
+    - Under "Network," set up two network adapters for each VM. For the DC VM, choose "NAT" and "Internal Network." For the client VM, select "Internal Network."
+    - Give each adapter a recognizable name, like "NAT" and "Internal."
+
+**Step 7: Install Active Directory and Configure Domain**
+
+- **Instructions:**
+    - Start the DC VM and log in with the administrator password.
+    - Open "Server Manager."
+    - Click "Add roles and features" and follow the wizard.
+    - Select the "Active Directory Domain Services" role and complete the installation.
+    - After installation, click the flag in Server Manager and choose "Promote this server to a domain controller."
+    - Follow the prompts to create a new forest with a specified domain name.
+
+**Step 8: Create Administrator Accounts**
+
+- **Instructions:**
+    - In Server Manager, open "Active Directory Users and Computers."
+    - Right-click the "Users" container and create a new organizational unit (OU) named "Admins."
+    - Inside the "Admins" OU, create user accounts with admin privileges.
+    - Add these accounts to the "Domain Admins" group.
+
+**Step 9: Set Up Routing and Remote Access (RAS) and Network Address Translation (NAT)**
+
+- **Instructions:**
+    - In Server Manager, click "Add roles and features."
+    - Select "Remote Access" and follow the wizard to install RAS.
+    - Configure NAT for the internal network adapter to provide internet access.
+
+**Step 10: Configure DHCP Server**
+
+- **Instructions:**
+    - In Server Manager, install the "DHCP Server" role.
+    - Create a DHCP scope for IP address assignment within the internal network.
+    - Set the lease duration and configure DHCP options for DNS and gateway.
+
+**Step 11: Optimize Browser Security**
+
+- **Instructions:**
+    - Disable Internet Explorer Enhanced Security Configuration from the "Local Server" settings in Server Manager.
+
+**Step 12: Automate User Account Creation**
+
+- **Instructions:**
+    - Download the PowerShell script for creating user accounts.
+    - Open PowerShell ISE and enable script execution with the command `Set-ExecutionPolicy Unrestricted`.
+    - Run the script to create user accounts.
+
+**Step 13: Create Windows 10 Client VM**
+
+- **Instructions:**
+    - In VirtualBox, create a new VM for the Windows 10 client.
+    - Configure its network settings to use the same internal network adapter as the domain controller.
+
+**Step 14: Test the Setup**
+
+- **Instructions:**
+    - Start the Windows 10 client VM and join it to the domain.
+    - Test user authentication, network access, and internet access.
+
+By following these detailed step-by-step instructions, you can set up a functional Active Directory lab environment for learning, testing, or simulating real-world corporate scenarios.
